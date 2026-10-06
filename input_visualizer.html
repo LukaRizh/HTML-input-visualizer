@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- The original template was created in collaboration with Gemini AI. -->
+<!-- This code was provided as starter code by my teacher. -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML Inputs</title>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px auto;
+      max-width: 900px;
+      line-height: 1.6;
+      background-color: #fafafa;
+      color: #333;
+    }
+    header {
+      border-bottom: 2px solid #333;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+    .input-row {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background-color: #fff;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .section {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .section-title {
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #555;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 5px;
+    }
+    .code-block {
+      background-color: #f4f4f4;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 10px;
+      margin: 0;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 14px;
+      color: #c7254e;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>HTML Input Reference</h1>
+  </header>
+
+  <main x-data="inputTools">
+
+    <!-- ROW 1: Textbox (Text Input) -->
+    <div class="input-row">
+      <!-- Interactive Element -->
+      <div class="section">
+        <span class="section-title">1. Textbox</span>
+				<div id="TODO_Textbox">
+					<label for="textbox-demo">Type something:</label>
+					<input type="text" x-model="textVal" placeholder="Start typing..."></input>
+        </div>
+        
+				<!-- Output -->
+        <p>Value of textVal: <span x-text="textVal"></span></p>
+      </div>
+      
+      <!-- HTML / Alpine Code Visualizer -->
+      <div class="section">
+        <span class="section-title">HTML Code</span>
+        <div class="code-block">
+          &lt;input type="text" x-model="textVal" placeholder="Start typing..."&gt;<br><br>
+          &lt;p&gt;Value of textVal: &lt;span x-text="textVal"&gt;&lt;/span&gt;&lt;/p&gt;
+        </div>
+      </div>
+    </div>
+
+    <!-- ROW 2: Button -->
+    <div class="input-row">
+      <!-- Interactive Element -->
+      <div class="section">
+        <span class="section-title">2. Button</span>
+        <div id="TODO_Button">
+          <button @click="clickButton()">Click me!</button>
+          <button @click="clickCount = 0">Reset</button>
+        </div>
+        
+        <!-- Output -->
+        <p>Value of clickcount: <span x-text="clickCount"></span></p>
+      </div>
+      
+      <!-- HTML / Alpine Code Visualizer -->
+      <div class="section">
+        <span class="section-title">HTML Code</span>
+        <div class="code-block">
+          &lt;button @click="clickButton()"&gt;Click Me!&lt;/button&gt;<br>
+          <br>&lt;p&gt;Value of clickCount: &lt;span x-text="clickCount"&gt;&lt;/span&gt;&lt;/p&gt;
+        </div>
+      </div>
+
+      <!-- JavaScript Method Visualizer -->
+      <div class="section">
+        <span class="section-title">Alpine JS Method</span>
+        <div class="code-block">
+          clickButton() {<br>
+          &nbsp;&nbsp;this.clickCount++;<br>
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- ROW 3: Checkbox -->
+    <div class="input-row">
+      <!-- Interactive Element -->
+      <div class="section">
+        <span class="section-title">3. Checkbox</span>
+        <div id="TODO_Checkbox">
+          <label>
+            <input type="checkbox" x-model="isChecked" @change="updateStatus()"> Toggle Message
+          </label>
+          
+        </div>
+				
+				<!-- Output -->
+        <p>Value of statusText: <span x-text="statusText"></span></p>
+      </div>
+      
+      <!-- HTML / Alpine Code Visualizer -->
+      <div class="section">
+        <span class="section-title">HTML Code</span>
+        <div class="code-block">
+          &lt;!-- @click can also be used with checkboxes. --&gt;<br>
+					&lt;label&gt;<br>
+          &nbsp;&nbsp;&lt;input type="checkbox" x-model="isChecked" @change="updateStatus()"&gt;&nbsp;Toggle Message<br>
+          &lt;/label&gt;<br>
+          <br>&lt;p&gt;Value of statusText: &lt;span x-text="statusText"&gt;&lt;/span&gt;&lt;/p&gt;
+        </div>
+      </div>
+
+      <!-- JavaScript Method Visualizer -->
+      <div class="section">
+        <span class="section-title">Alpine JS Method</span>
+        <div class="code-block">
+          updateStatus() {<br>
+          &nbsp;&nbsp;if (this.isChecked) {<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;this.statusText = 'Checked';<br>
+          &nbsp;&nbsp;} else {<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;this.statusText = 'Not Checked';<br>
+          &nbsp;&nbsp;}<br>
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- ROW 4: Radio Buttons -->
+    <div class="input-row">
+      <!-- Interactive Element -->
+      <div class="section">
+        <span class="section-title">4. Radio Buttons</span>
+        <p>Pick your favorite season:</p>
+        <div id="TODO_Radio-Buttons">
+          <label>
+            <input type="radio" name="season" value="summer" x-model="radioChoice"> Summer
+          </label>
+          <label>
+            <input type="radio" name="season" value="spring" x-model="radioChoice"> Spring
+          </label>
+          <label>
+            <input type="radio" name="season" value="autumn" x-model="radioChoice"> Autumn
+          </label>
+          <label>
+            <input type="radio" name="season" value="winter" x-model="radioChoice"> Winter
+          </label>
+        </div>
+        
+        <!-- Output -->
+        <p>Value of radioChoice: <span x-text="radioChoice"></span></p>
+      </div>
+      
+      <!-- HTML / Alpine Code Visualizer -->
+      <div class="section">
+        <span class="section-title">HTML Code</span>
+        <div class="code-block">
+          &lt;!-- Use the same x-model on each radio. --&gt;<br>
+					&lt;!-- @change and @click can be used with radio buttons. --&gt;<br>
+          &lt;label&gt;<br>
+          &nbsp;&nbsp;&lt;input type="radio" name="season" value="spring" x-model="radioChoice"&gt;&nbsp;Spring<br>
+          &lt;/label&gt;<br>
+          &lt;label&gt;<br>
+          &nbsp;&nbsp;&lt;input type="radio" name="season" value="summer" x-model="radioChoice"&gt;&nbsp;Summer<br>
+          &lt;/label&gt;<br>
+          &lt;label&gt;<br>
+          &nbsp;&nbsp;&lt;input type="radio" name="season" value="autumn" x-model="radioChoice"&gt;&nbsp;Autumn<br>
+          &lt;/label&gt;<br>
+          &lt;label&gt;<br>
+          &nbsp;&nbsp;&lt;input type="radio" name="season" value="winter" x-model="radioChoice"&gt;&nbsp;Winter<br>
+          &lt;/label&gt;<br>
+          <br>&lt;p&gt;Value of radioChoice: &lt;span x-text="radioChoice"&gt;&lt;/span&gt;&lt;/p&gt;
+        </div>
+      </div>
+    </div>
+
+    <!-- ROW 5: Dropdown Menu (Select) -->
+    <div class="input-row">
+      <!-- Interactive Element -->
+      <div class="section">
+        <span class="section-title">5. Dropdown Menu</span>
+				<div id="TODO_Dropdown">
+					<label for="icecream-dropdown">Choose an ice cream flavor:</label>
+					<select x-model="dropdownVal">
+            <option value="">-- Select --</option>
+            <option value="Vanilla">Vanilla</option>
+            <option value="Chocolate">Chocolate</option>
+            <option value="Strawberry">Strawberry</option>
+            <option value="Mint Chip">Mint Chip</option>
+
+					</select>
+				</div>
+        
+        <!-- Output -->
+        <p>Value of dropdownVal: <span x-text="dropdownVal"></span></p>
+      </div>
+      
+      <!-- HTML / Alpine Code Visualizer -->
+      <div class="section">
+        <span class="section-title">HTML Code</span>
+        <div class="code-block">
+          &lt;!-- @change can be used with dropdown menus. --&gt;<br>
+					&lt;select x-model="dropdownVal"&gt;<br>
+          &nbsp;&nbsp;&lt;option value=""&gt;-- Select --&lt;/option&gt;<br>
+          &nbsp;&nbsp;&lt;option value="Vanilla"&gt;Vanilla&lt;/option&gt;<br>
+          &nbsp;&nbsp;&lt;option value="Chocolate"&gt;Chocolate&lt;/option&gt;<br>
+          &nbsp;&nbsp;&lt;option value="Strawberry"&gt;Strawberry&lt;/option&gt;<br>
+          &nbsp;&nbsp;&lt;option value="Mint Chip"&gt;Mint Chocolate Chip&lt;/option&gt;<br>
+          &lt;/select&gt;<br>
+          <br>&lt;p&gt;Value of dropdownVal: &lt;span x-text="dropdownVal"&gt;&lt;/span&gt;&lt;/p&gt;
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    document.addEventListener('alpine:init', () => {
+      Alpine.data('inputTools', () => ({
+        textVal: '',
+        clickCount: 0,
+        isChecked: false,
+        statusText: 'Not Checked',
+        radioChoice: '',
+        dropdownVal: '',
+        clickButton() {
+          this.clickCount++;
+        },
+        updateStatus() {
+          if (this.isChecked) {
+            this.statusText = 'Checked';
+          } else {
+            this.statusText = 'Not Checked';
+          }
+        }
+
+
+
+        
+      }));
+    });
+  </script>
+
+</body>
+</html>
